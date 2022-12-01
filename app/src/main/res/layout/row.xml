@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="5dp"
+    app:cardCornerRadius="5dp">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        >
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/content_container"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_margin="20dp"
+            android:src="@color/black"
+            android:id="@+id/img"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:id="@+id/name"
+            android:layout_below="@+id/img"
+            android:textSize="20sp"
+            android:layout_marginLeft="19dp"
+            android:fontFamily="monospace"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_down"
+            android:id="@+id/arrow_down"
+            android:layout_marginStart="140dp"
+            android:layout_below="@+id/img"
+            android:layout_marginBottom="17dp"
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:visibility="visible">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this section is about the discription of the book"
+            android:id="@+id/discription"
+            android:layout_marginStart="13dp"
+            />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_up"
+                android:id="@+id/arrow_up"
+                android:layout_below="@+id/discription"
+                android:layout_marginLeft="140dp"/>
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:id="@+id/deletbtn"
+                android:layout_below="@id/discription"
+                android:text="Delete"
+                android:textSize="10sp"
+                android:textColor="@color/red"
+                android:layout_marginLeft="65dp"
+                android:background="@color/white"
+
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.cardview.widget.CardView>
