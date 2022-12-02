@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -165,26 +166,17 @@ public class bookactivity extends AppCompatActivity {
     }
 //    setting a reminder
     public void set_time(){
-        Calendar calender = Calendar.getInstance();
-        int hours = calender.get(Calendar.HOUR_OF_DAY);
-        int minute = calender.get(Calendar.MINUTE);
-        TimePickerDialog timepicker = new TimePickerDialog(bookactivity.this, androidx.appcompat.R.style.Widget_AppCompat_ActionBar, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                Calendar c = Calendar.getInstance();
-                c.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                c.set(Calendar.MINUTE,minute);
-                c.setTimeZone(TimeZone.getDefault());
-                SimpleDateFormat format = new SimpleDateFormat("HHmm");
-                String time  = format.format(c.getTime());
-//                        adding the time to the list of reminder times
-                notification_times.getInstance().add_reminder_time(time);
 
+                    Intent intent = new Intent(Intent.ACTION_INSERT);
+                    intent.setData(CalendarContract.Events.CONTENT_URI);
+                    intent.putExtra(CalendarContract.Events.TITLE, "time");
+//                    intent.putExtra(CalendarContract.Events.ORIGINAL_INSTANCE_TIME, );
+                    if (intent.resolveActivity(getPackageManager()) != null){
+                        startActivity(intent);
+                    }else
+                        Toast.makeText(bookactivity.this,"There is no Calendar app.",Toast.LENGTH_SHORT).show();
             }
-        },hours,minute,false);
-        timepicker.show();
 
-    }
     public void onDestroy () {
 
         super.onDestroy();

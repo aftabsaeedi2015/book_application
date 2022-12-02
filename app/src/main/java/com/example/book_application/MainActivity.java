@@ -29,36 +29,5 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Intent intent = getIntent();
-        if(!forground_service_running()){
-            startService();
-        }
-
-//        stopService();
-
-
-    }
-        public void stopService() {
-            Intent serviceIntent = new Intent(this, Service.class);
-            stopService(serviceIntent);
-        }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void startService() {
-        Intent serviceIntent = new Intent(this, Service.class);
-        startForegroundService(serviceIntent);
-    };
-    public boolean forground_service_running(){
-        ActivityManager manager = (ActivityManager) getSystemService(MainActivity.this.ACTIVITY_SERVICE);
-        for(ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)){
-            if(Service.class.getName().equals(service.service.getClassName())){
-                return true;
-            }
-
-        }
-        return false;
-    }
-    public static void showtext(){
-        System.out.println("hello");
-
     }
 }
