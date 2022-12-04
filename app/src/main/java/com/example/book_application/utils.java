@@ -1,5 +1,8 @@
 package com.example.book_application;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class utils {
@@ -17,8 +20,7 @@ public class utils {
         if(finished_books==null){
             finished_books = new ArrayList<>();
         }
-        initData();
-
+//        pass the books here
     }
 
     public static utils getInstance() {
@@ -32,42 +34,61 @@ public class utils {
     }
 
 //here we are adding all the books to the all_books array
-    private void initData() {
-        book_info book = new book_info("aftab","this is an amazing book","https://edit.org/images/cat/book-covers-big-2019101610.jpg",1,"url");
-        book_info book1 = new book_info("waheed","this is an amazing book","https://rukminim1.flixcart.com/image/612/612/jpfsnm80/book/8/9/0/process-implementation-through-5s-original-imafbnxzqyr6cggd.jpeg?q=70",2,"url");
-        book_info book2 = new book_info("najeeb","this is an amazing book","https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1329578342l/13490389.jpg",3,"url");
-        book_info book3= new book_info("attaullah","this is an amazing book","https://images.theconversation.com/files/364159/original/file-20201019-17-rski0e.JPG?ixlib=rb-1.1.0&q=45&auto=format&w=1000&fit=clip",4,"url");
-        book_info book4 = new book_info("saeedi","this is an amazing book","https://www.lilydalebooks.com.au/Catalog/Image/WebImage-20190806-14822-atar-text-guide-unpolished-gem.PNG?w=438&h=576",5,"url");
-        book_info book5 = new book_info("john","this is an amazing book","https://n1.sdlcdn.com/imgs/d/o/t/Pung-Chow-the-Game-of-SDL622834302-1-fd93f.jpg",6,"url");
-        all_books.add(book);
-        all_books.add(book1);
-        all_books.add(book2);
-        all_books.add(book3);
-        all_books.add(book4);
-        all_books.add(book5);
+    public ArrayList<book_info> initData(String json) {
+        all_books = new ArrayList<>();
+        all_books = getBooksFromJsonResult(json);
+        return all_books;
     }
 
+    public static ArrayList<book_info> getBooksFromJsonResult(String json) {
+        final String ID = "id";
+        final String TITLE = "title";
+        final String SUB_TITLE = "subTitle";
+        final String AUTHORS = "authors";
+        final String ITEMS = "items";
+        final String VOLUME_INFO = "volumeInfo";
+        try {
+            JSONObject jsonBooks = new JSONObject(json);
+            JSONArray booksArray = jsonBooks.getJSONArray(ITEMS);
+            int numOfBooks = booksArray.length();
+            System.out.println(numOfBooks);
+            for (int i = 0; i < numOfBooks; i++) {
+                JSONObject jsonBook = booksArray.getJSONObject(i);
+                JSONObject jsonVolumeInfo = jsonBook.getJSONObject("volumeInfo");
+                JSONObject jsonImages = jsonVolumeInfo.getJSONObject("imageLinks");
+                JSONObject jsonBookUrl = jsonBook.getJSONObject("accessInfo");
+                JSONObject pdf = jsonBookUrl.getJSONObject("pdf");
+                book_info book = new book_info(
+                        jsonVolumeInfo.getString(AUTHORS),
+                        jsonVolumeInfo.getString("description"),
+                       jsonImages.getString("thumbnail"),
+                      jsonBook.getString("id"),
+                        "url",
+                        jsonVolumeInfo.getString("title"));
+                all_books.add(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        Log.e("book1", String.valueOf(all_books.get(0)));
+        return all_books;
+    }
 //    here starts the getters
 public static ArrayList<book_info> getAll_books() {
     return all_books;
 }
-
-
     public static ArrayList<book_info> getFavorite_books() {
         return favorite_books;
     }
-
     public static ArrayList<book_info> getFinished_books() {
         return finished_books;
     }
 
-
-
-
 //    deleting a bookbyid when deletbtn is clicked
-    public  void delet_by_id(int bookid){
+    public  void delet_by_id(String bookid){
         for(book_info b: favorite_books){
-            if(b.getBook_id()==bookid){
+            if(b.getID()==bookid){
                 favorite_books.remove(b);
             }
         }
@@ -79,9 +100,9 @@ public static ArrayList<book_info> getAll_books() {
         all_books.add(book);
     }
 
-    public book_info getbookbyid(int book_id){
+    public book_info getbookbyid(String book_id){
         for(book_info b: all_books){
-            if(b.getBook_id()==book_id){
+            if(b.getID().equals(book_id)){
                 return b;
             }
         }
@@ -104,4 +125,6 @@ public static ArrayList<book_info> getAll_books() {
             return false;
 
     }
+
+
 }

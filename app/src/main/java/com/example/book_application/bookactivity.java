@@ -4,28 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.pspdfkit.configuration.activity.PdfActivityConfiguration;
 import com.pspdfkit.ui.PdfActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.TimeZone;
+import java.util.Arrays;
+import java.util.List;
 
 public class bookactivity extends AppCompatActivity {
     String book_id="book_id",url;
@@ -63,19 +60,21 @@ public class bookactivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if(intent!=null){
-            int book_Id = intent.getIntExtra(book_id,-1);
+            String book_Id = intent.getStringExtra("book_id");
 
             book_info clicked_book = utils.getInstance().getbookbyid(book_Id);
             //            book url
-            url = clicked_book.book_url;
+            url = clicked_book.URL;
 //            setting text in the author
-            String authorTxt = clicked_book.book_author;
-            author.setText(authorTxt);
+            String authorTxt = clicked_book.AUTHOR.replace("]","");
+            authorTxt = authorTxt.replace("[","");
+            List<String> author1 = Arrays.asList(authorTxt.split(","));
+            author.setText(author1.get(0));
 //            getting discript of book
-            String discriptionTxt = clicked_book.book_discription;
+            String discriptionTxt = clicked_book.DESCRIPTION;
             discription.setText(discriptionTxt);
 //            getting image link
-            String imgLink = clicked_book.book_img_link;
+            String imgLink = clicked_book.IMG;
             Glide.with(bookactivity.this).asBitmap().load(imgLink).into(book_img);
 
 
@@ -134,10 +133,16 @@ public class bookactivity extends AppCompatActivity {
             read.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final Uri uri = Uri.parse("file:///android_asset/2130.pdf");
-                    final PdfActivityConfiguration config = new PdfActivityConfiguration
-                            .Builder(bookactivity.this).build();
-                    PdfActivity.showDocument(bookactivity.this, uri, config);
+
+
+
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tutorialspoint.com/android/android_tutorial.pdf"));
+                    startActivity(browserIntent);
+//                    final Uri uri = Uri.parse("file:///android_asset/2130.pdf");
+//                    final Uri uri2 = Uri.parse("http:///books.google.co.in/books/download/Android_For_Dummies-sample-pdf.acsm?id=JGH0DwAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api");
+//                    final PdfActivityConfiguration config = new PdfActivityConfiguration
+//                            .Builder(bookactivity.this).build();
+//                    PdfActivity.showDocument(bookactivity.this, uri2, config);
                 }
             });
 //            handling set timer button click

@@ -1,36 +1,43 @@
 package com.example.book_application;
 
 public class book_info {
-    String book_author;
-    String book_discription;
-    String book_img_link;
-    int  book_id;
-    String book_url;
+    String AUTHOR;
+    String DESCRIPTION;
+    String IMG;
+    String ID;
+    String URL;
+    String TITLE;
     boolean collapsed;
 
-    public int getBook_id() {
-        return book_id;
+
+    public String getID() {
+        return ID;
     }
 
-    public book_info(String book_author, String book_discription, String book_img_link, int book_id,String book_url) {
-        this.book_author = book_author;
-        this.book_discription = book_discription;
-        this.book_img_link = book_img_link;
+    public book_info(String AUTHOR, String DESCRIPTION, String IMG, String ID, String URL,String TITLE) {
+        this.AUTHOR = AUTHOR;
+        this.DESCRIPTION = DESCRIPTION;
+        this.IMG = IMG;
         collapsed = false;
-        this.book_id = book_id;
-        this.book_url = book_url;
+        this.ID = ID;
+        this.URL = URL;
+        this.TITLE = TITLE;
     }
 
-    public String getBook_author() {
-        return book_author;
+    public String getAUTHOR() {
+        return AUTHOR;
     }
 
-    public String getBook_discription() {
-        return book_discription;
+    public String getDESCRIPTION() {
+        return DESCRIPTION;
     }
 
-    public void setBook_img_link(String book_img_link) {
-        this.book_img_link = book_img_link;
+    public String getTITLE() {
+        return TITLE;
+    }
+
+    public void setIMG(String IMG) {
+        this.IMG = IMG;
     }
     public void setcollapsed(boolean collapsed){
         this.collapsed = collapsed;

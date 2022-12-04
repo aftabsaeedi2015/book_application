@@ -17,7 +17,7 @@ public class finished_books extends AppCompatActivity {
         adapter adapter = new adapter(this,"finshed_books");
         recyclerview.setAdapter(adapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter.addBook(utils.getFinished_books());
+        adapter.setBooks(utils.getFinished_books());
         Intent intent = getIntent();
     }
 }

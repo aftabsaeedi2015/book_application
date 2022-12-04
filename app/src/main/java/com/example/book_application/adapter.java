@@ -3,6 +3,7 @@ package com.example.book_application;
 import android.content.Context;
 import android.content.Intent;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,16 +39,11 @@ public class adapter extends RecyclerView.Adapter<adapter.viewholder> {
     @Override
 //    binding data to the views created
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        holder.name.setText(book_info_array.get(holder.getAdapterPosition()).book_author);
-        holder.discription.setText(book_info_array.get(holder.getAdapterPosition()).book_discription);
-        Glide.with(context).asBitmap().load(book_info_array.get(holder.getAdapterPosition()).book_img_link).into(holder.img);
+        holder.name.setText(book_info_array.get(holder.getAdapterPosition()).TITLE);
+        holder.discription.setText(book_info_array.get(holder.getAdapterPosition()).DESCRIPTION);
+        Glide.with(context).asBitmap().load(book_info_array.get(holder.getAdapterPosition()).IMG).into(holder.img);
 
         //        we handle the deletbtn here
-
-
-
-
-
         if(book_info_array.get(holder.getAdapterPosition()).collapsed){
             TransitionManager.beginDelayedTransition(holder.content_container);
             if (activity.equals("favorite_books")){
@@ -56,7 +51,7 @@ public class adapter extends RecyclerView.Adapter<adapter.viewholder> {
                 holder.deletbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int book_id = book_info_array.get(holder.getAdapterPosition()).book_id;
+                        String book_id = book_info_array.get(holder.getAbsoluteAdapterPosition()).ID;
                         utils.getInstance().delet_by_id(book_id);
                         notifyDataSetChanged();
 
@@ -85,8 +80,8 @@ public class adapter extends RecyclerView.Adapter<adapter.viewholder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,bookactivity.class);
-                intent.putExtra("book", book_info_array.get(holder.getAdapterPosition()).book_id);
-                intent.putExtra("book_id",book_info_array.get(holder.getAdapterPosition()).book_id);
+                intent.putExtra("book", String.valueOf(book_info_array.get(holder.getAdapterPosition())));
+                intent.putExtra("book_id",String.valueOf(book_info_array.get(holder.getAdapterPosition()).ID));
                 context.startActivity(intent);
             }
         });
@@ -94,13 +89,14 @@ public class adapter extends RecyclerView.Adapter<adapter.viewholder> {
 
     @Override
     public int getItemCount() {
+        Log.e("anything",String.valueOf(book_info_array.size()));
         return book_info_array.size();
     }
 
 
 
 //    adding books to the adapter
-    public void addBook(ArrayList books){
+    public void setBooks(ArrayList<book_info> books){
         book_info_array= books;
         notifyDataSetChanged();
     }
@@ -126,9 +122,10 @@ public class adapter extends RecyclerView.Adapter<adapter.viewholder> {
             arrow_down.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    book_info current_book = book_info_array.get(getAdapterPosition());
+                    book_info current_book = book_info_array.get(getPosition());
                    current_book.setcollapsed(!current_book.collapsed);
                    notifyItemChanged(getAdapterPosition());
+                   arrow_down.setVisibility(View.GONE);
                 }
 
             });
@@ -138,6 +135,7 @@ public class adapter extends RecyclerView.Adapter<adapter.viewholder> {
                     book_info current_book = book_info_array.get(getAdapterPosition());
                     current_book.setcollapsed(!current_book.collapsed);
                     notifyItemChanged(getAdapterPosition());
+                    arrow_down.setVisibility(View.VISIBLE);
                 }
             });
 

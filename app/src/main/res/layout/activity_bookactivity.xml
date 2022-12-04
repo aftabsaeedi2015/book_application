@@ -15,56 +15,52 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:src="@color/black" />
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/book_img"
         android:id="@+id/showallbooks"
-        android:layout_marginTop="20dp"
-        android:text="@string/allbooks"/>
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/book_img"
-        android:layout_below="@id/showallbooks"
+        android:text="@string/allbooks" />
+
+    <Button
         android:id="@+id/showfavoritebooks"
-        android:layout_marginTop="20dp"
-        android:text="@string/favorite_books"/>
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/book_img"
-        android:layout_below="@id/showfavoritebooks"
-        android:id="@+id/addtofavorite"
+        android:layout_below="@id/showallbooks"
         android:layout_marginTop="20dp"
-        android:text="@string/add_to_favorite"/>
+        android:layout_toRightOf="@id/book_img"
+        android:text="@string/favorite_books" />
+
+    <Button
+        android:id="@+id/addtofavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/showfavoritebooks"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/book_img"
+        android:text="@string/add_to_favorite" />
 
     <Button
         android:id="@+id/showfinishedbooks"
-        android:layout_width="wrap_content"
+        android:layout_width="149dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/addtofavorite"
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/book_img"
         android:text="@string/finished_books" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Author"
         android:id="@+id/author"
+        android:layout_width="161dp"
+        android:layout_height="40dp"
         android:layout_below="@id/book_img"
-        android:layout_margin="20dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="discription"
-        android:id="@+id/discription"
-        android:layout_below="@+id/author"
-        android:layout_margin="20dp"
-
-
-        />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Author" />
 
     <Button
         android:id="@+id/addtofinished"
@@ -82,18 +78,42 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/discription"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="206dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="210dp"
         android:text="Read" />
 
     <Button
         android:id="@+id/settimer"
-        android:layout_width="183dp"
+        android:layout_width="173dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/read"
+        android:layout_below="@+id/discription"
         android:layout_alignEnd="@+id/read"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="-14dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="-189dp"
         android:text="set a Reminder" />
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="183dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="397dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/discription"
+        android:layout_width="391dp"
+        android:layout_height="180dp"
+        android:layout_below="@+id/author"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="discription" />
 
 </RelativeLayout>

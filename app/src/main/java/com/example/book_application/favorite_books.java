@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class favorite_books extends AppCompatActivity {
         adapter adapter = new adapter(this,"favorite_books");
         recyclerview.setAdapter(adapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter.addBook(utils.getFavorite_books());
+        adapter.setBooks(utils.getFavorite_books());
         Intent intent = getIntent();
 
     }
