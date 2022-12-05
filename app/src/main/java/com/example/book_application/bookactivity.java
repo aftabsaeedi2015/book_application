@@ -142,7 +142,7 @@ public class bookactivity extends AppCompatActivity {
 //                    final Uri uri2 = Uri.parse("http:///books.google.co.in/books/download/Android_For_Dummies-sample-pdf.acsm?id=JGH0DwAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api");
 //                    final PdfActivityConfiguration config = new PdfActivityConfiguration
 //                            .Builder(bookactivity.this).build();
-//                    PdfActivity.showDocument(bookactivity.this, uri2, config);
+//                    PdfActivity.showDocument(bookactivity.this, uri, config);
                 }
             });
 //            handling set timer button click
